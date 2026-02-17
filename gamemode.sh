@@ -1,10 +1,5 @@
 #!/bin/bash
 
-# PROJECT FREEDOM: UNIFIED GAMING ENGINE
-# Usage: 
-#   1. ./gamemode.sh              (Optimizes PC & Launches Lutris)
-#   2. ./gamemode.sh trainer.exe  (Launches a trainer securely)
-
 # --- CONFIGURATION ---
 DEFAULT_SWAPPINESS=60
 GAMING_SWAPPINESS=100
@@ -12,10 +7,10 @@ STATE_DIR="$HOME/.config/gamemode"
 mkdir -p "$STATE_DIR"
 
 
-# 1. Capture the default swappiness to return to it later
+
 ORIGINAL_SWAP=$(cat /proc/sys/vm/swappiness)
 
-# 2. Define the Restoration logic
+# Define the Restoration logic
 restore_system() {
     echo ""
     echo "[!] Closing session: Restoring system defaults..."
@@ -93,7 +88,7 @@ run_trainer_mode() {
     wait "$TPID" 2>/dev/null || true
     
     # restore Security State, if changed
-    # if it was 0 when we started, we leave it at 0, dont wanna break the game
+    
     echo "    -> Trainer exited. Restoring security state to: $ORIG_PTRACE"
     echo "${ORIG_PTRACE}" | sudo tee /proc/sys/kernel/yama/ptrace_scope >/dev/null
     
